@@ -3,70 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Produto;
-use App\Http\Requests\StoreProdutoRequest;
+use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
 {
+    // GET /api/produtos
     public function index()
     {
-        return response()->json(Produto::all());
+        return Produto::all();
     }
 
-    public function store(StoreProdutoRequest $request)
-    {
-        $preco = str_replace(',', '.', $request->input('preco'));
-
-        $produto = Produto::create([
-            'nome' => $request->nome,
-            'preco' => $preco,
-            'quantidade' => $request->quantidade,
-            'marca' => $request->marca,
-        ]);
-
-        return response()->json(['message' => 'Produto cadastrado com sucesso!', 'produto' => $produto], 201);
-    }
-
+    // GET /api/produtos/{id}
     public function show($id)
     {
-        $produto = Produto::find($id);
-
-        if (!$produto) {
-            return response()->json(['error' => 'Produto não encontrado.'], 404);
-        }
-
-        return response()->json($produto);
+        return Produto::find($id);
     }
 
-    public function update(StoreProdutoRequest $request, $id)
+    // POST /api/produtos
+    public function store(Request $request)
     {
-        $produto = Produto::find($id);
-
-        if (!$produto) {
-            return response()->json(['error' => 'Produto não encontrado.'], 404);
-        }
-
-        $preco = str_replace(',', '.', $request->input('preco'));
-
-        $produto->update([
-            'nome' => $request->nome,
-            'preco' => $preco,
-            'quantidade' => $request->quantidade,
-            'marca' => $request->marca,
-        ]);
-
-        return response()->json(['message' => 'Produto atualizado com sucesso!', 'produto' => $produto]);
+        $produto = Produto::create($request->all());
+        return response()->json($produto, 201);
     }
 
-    public function destroy($id)
+    // PUT /api/produtos/{id}
+    public function update(Request $request, Produto $produto)
     {
-        $produto = Produto::find($id);
+        $produto->update($request->all());
+        return response()->json($produto, 200);
+    }
 
-        if (!$produto) {
-            return response()->json(['error' => 'Produto não encontrado.'], 404);
-        }
-
+    // DELETE /api/produtos/{id}
+    public function destroy(Produto $produto)
+    {
         $produto->delete();
-
-        return response()->json(['message' => 'Produto excluído com sucesso.']);
+        return response()->json(null, 204);
     }
 }
