@@ -18,7 +18,7 @@ class ClinicaController extends Controller
             'nome' => 'required|string|max:255',
             'cidade' => 'required|string|max:255',
             'bairro' => 'required|string|max:255',
-            'numero' => 'required|string|max:20',
+            'numero' => 'required',
         ]);
 
         $clinica = Clinica::create($request->all());
@@ -49,7 +49,7 @@ class ClinicaController extends Controller
             'nome' => 'required|string|max:255',
             'cidade' => 'required|string|max:255',
             'bairro' => 'required|string|max:255',
-            'numero' => 'required|string|max:20',
+            'numero' => 'required',
         ]);
 
         $clinica->update($request->all());
