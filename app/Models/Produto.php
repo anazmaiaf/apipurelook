@@ -9,6 +9,10 @@ class Produto extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'preco' => 'float',
+    ];
+
     protected $fillable = [
         'nome',
         'preco',

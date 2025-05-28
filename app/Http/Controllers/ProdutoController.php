@@ -4,13 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use App\Http\Resources\ProdutoResource;
+
 
 class ProdutoController extends Controller
 {
+
     public function index()
     {
-        $produtos = Produto::all();
-        return response()->json(['produtos' => $produtos]);
+        return ProdutoResource::collection(Produto::all());
     }
 
 
