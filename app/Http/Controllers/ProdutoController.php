@@ -4,22 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Models\Produto;
 use Illuminate\Http\Request;
+use App\Http\Resources\ProdutoResource;
+
 
 class ProdutoController extends Controller
 {
-    public readonly Produto $produtos;
-
-    public function __construct()
-    {
-        $this->produtos = new Produto();
-
-    }
-
     public function index()
     {
-        $data = $this->produtos->all();
-        return response()->json(["data"=>$data]);
+        return Produto::all();
     }
+
 
     public function show($id)
     {
