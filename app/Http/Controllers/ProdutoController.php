@@ -14,7 +14,6 @@ class ProdutoController extends Controller
         return Produto::all();
     }
 
-
     public function show($id)
     {
         return Produto::find($id);
@@ -38,7 +37,8 @@ class ProdutoController extends Controller
             'quantidade' => ['required', 'integer']
         ]);
 
-        $produtoExistente = $this->produtos->where('nome', $request->nome)->first();
+        // $produtoExistente = $this->produtos->where('nome', $request->nome)->first();
+        $produtoExistente = Produto::where('nome', $request->nome)->first();
 
         if ($produtoExistente) {
             return response()->json([
@@ -47,7 +47,7 @@ class ProdutoController extends Controller
             ], 400);
         }
 
-        $create = $this->produtos->create([
+    $create = Produto::create([
             'nome' => $request->nome,
             'marca' => $request->marca,
             'preco' => $request->preco,
