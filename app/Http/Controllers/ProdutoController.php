@@ -11,7 +11,9 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        return Produto::all();
+        // return Produto::all();
+        $data = Produto::all();
+        return response()->json(['data' => $data]);
     }
 
     public function show($id)
