@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "2a2b1b92-9cb1-4be2-aa5d-6da44b3a1cc4",
+		"name": "API Mobile 2025",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44582012"
+	},
+	"item": [
+		{
+			"name": "autenticação",
+			"item": [
+				{
+					"name": "teste de registro",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Response status code is 404\", function () {\r",
+									"  pm.expect(pm.response.code).to.equal(404);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 200ms\", function () {\r",
+									"  pm.expect(pm.response.responseTime).to.be.below(200);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response has the required Content-Type header\", function () {\r",
+									"    pm.expect(pm.response.headers.get(\"Content-Type\")).to.include(\"application/json\");\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response body is empty\", function () {\r",
+									"    pm.expect(pm.response.text()).to.be.empty;\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response body schema matches the expected structure\", function () {\r",
+									"    pm.expect(pm.response.text()).to.equal(\"\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"iraci\",\r\n  \"email\": \"iraci@email.com\",\r\n  \"password\": \"12345678\",\r\n  \"password_confirmation\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://4082-45-7-160-189.ngrok-free.app/api/register",
+							"protocol": "https",
+							"host": [
+								"4082-45-7-160-189",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teste de login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"admin@gmail.com\",\r\n  \"password\": \"12345678\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://engaged-muskrat-naturally.ngrok-free.app/api/login",
+							"protocol": "https",
+							"host": [
+								"engaged-muskrat-naturally",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Testes de login, cadastro e logout"
+		},
+		{
+			"name": "produtos",
+			"item": [
+				{
+					"name": "teste criar produto",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 4|ZxB0YAW0vgVYb28uiL2ZmUx2HPv3EOaMYXM2jEwB9f7c9325",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Produtinho\",\r\n    \"preco\": 502,\r\n    \"quantidade\": 52,\r\n    \"marca\": \"Marca asd\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://engaged-muskrat-naturally.ngrok-free.app/api/produtos",
+							"protocol": "https",
+							"host": [
+								"engaged-muskrat-naturally",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teste listar produtos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 4|ZxB0YAW0vgVYb28uiL2ZmUx2HPv3EOaMYXM2jEwB9f7c9325",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://engaged-muskrat-naturally.ngrok-free.app/api/produtos",
+							"protocol": "https",
+							"host": [
+								"engaged-muskrat-naturally",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"produtos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teste atualizar produto",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 3|DPNSd7QXzrlyI0IqvpuKwkjSVOFlnVWk73UVL4NOa6318bd6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Produto 32\",\r\n  \"quantidade\": 3,\r\n  \"preco\": 30.75,\r\n  \"marca\": \"Marca 32\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://bcd8-45-7-160-189.ngrok-free.app/api/produtos/32",
+							"protocol": "https",
+							"host": [
+								"bcd8-45-7-160-189",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"produtos",
+								"32"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teste deletar produto",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 4|ZxB0YAW0vgVYb28uiL2ZmUx2HPv3EOaMYXM2jEwB9f7c9325",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://engaged-muskrat-naturally.ngrok-free.app/api/produtos/11",
+							"protocol": "https",
+							"host": [
+								"engaged-muskrat-naturally",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"produtos",
+								"11"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Testes de read, create, show, put e delete produtos."
+		},
+		{
+			"name": "servicos",
+			"item": [
+				{
+					"name": "teste criar servico",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 10|tb0zcjUzdaF9LMknDuQmhGrxPnMe7SLjv5sv3434bdc5ee63",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"ana\",\r\n    \"valor\": 2002\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://engaged-muskrat-naturally.ngrok-free.app/api/servicos",
+							"protocol": "https",
+							"host": [
+								"engaged-muskrat-naturally",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"servicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teste listar servicos",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 10|tb0zcjUzdaF9LMknDuQmhGrxPnMe7SLjv5sv3434bdc5ee63",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://engaged-muskrat-naturally.ngrok-free.app/api/servicos",
+							"protocol": "https",
+							"host": [
+								"engaged-muskrat-naturally",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"servicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teste atualizar servicos",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 10|tb0zcjUzdaF9LMknDuQmhGrxPnMe7SLjv5sv3434bdc5ee63",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"nome\": \"Atualizado\",\r\n  \"valor\": 250\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://engaged-muskrat-naturally.ngrok-free.app/api/servicos/3",
+							"protocol": "https",
+							"host": [
+								"engaged-muskrat-naturally",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"servicos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "teste deletar servicos",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer 10|tb0zcjUzdaF9LMknDuQmhGrxPnMe7SLjv5sv3434bdc5ee63",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://engaged-muskrat-naturally.ngrok-free.app/api/servicos/8",
+							"protocol": "https",
+							"host": [
+								"engaged-muskrat-naturally",
+								"ngrok-free",
+								"app"
+							],
+							"path": [
+								"api",
+								"servicos",
+								"8"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Testes de read, create, show, put e delete servicos."
+		}
+	]
+}
