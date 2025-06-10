@@ -11,27 +11,12 @@ class ProdutoController extends Controller
 {
     public function index()
     {
-        // return Produto::all();
         $data = Produto::all();
         return response()->json(['data' => $data]);
     }
 
-    public function show($id)
-    {
-        return Produto::find($id);
-    }
-
     public function store(Request $request)
     {
-        // $create = $this->produtos->create([
-        //     'nome' => $request->nome,
-        //     'marca' => $request->marca,
-        //     'preco' => $request->preco,
-        //     'quantidade' => $request->quantidade
-        // ]);
-        
-        // return response()->json($create, 201);
-
         $request->validate([
             'nome' => ['required', 'string', 'max:255'],
             'marca' => ['required', 'string', 'max:255'],
@@ -39,7 +24,6 @@ class ProdutoController extends Controller
             'quantidade' => ['required', 'integer']
         ]);
 
-        // $produtoExistente = $this->produtos->where('nome', $request->nome)->first();
         $produtoExistente = Produto::where('nome', $request->nome)->first();
 
         if ($produtoExistente) {
@@ -49,7 +33,7 @@ class ProdutoController extends Controller
             ], 400);
         }
 
-    $create = Produto::create([
+        $create = Produto::create([
             'nome' => $request->nome,
             'marca' => $request->marca,
             'preco' => $request->preco,
@@ -73,7 +57,6 @@ class ProdutoController extends Controller
     {
         $produto->update($request->all());
         return response()->json($produto, 200);
-        
     }
 
     public function destroy(Produto $produto)

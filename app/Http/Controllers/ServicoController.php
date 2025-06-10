@@ -9,36 +9,65 @@ class ServicoController extends Controller
 {
     public function index()
     {
-        return response()->json(Servico::all());
+        $data = Servico::all();
+        return response()->json(['data' => $data]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'nome' => 'required|string',
-            'valor' => 'required|numeric'
+            'nome' => ['required', 'string', 'max:255'],
+            'valor' => ['required', 'integer']
         ]);
 
-        $servico = Servico::create($request->all());
-        return response()->json($servico, 201);
-    }
+        $servicoExistente = Servico::where('nome', $request->nome)->first();
 
-    public function show($id)
-    {
-        $servico = Servico::findOrFail($id);
-        return response()->json($servico);
+        if ($servicoExistente) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Já existe um serviço com esse nome.'
+            ], 400);
+        }
+
+        $create = Servico::create([
+            'nome' => $request->nome,
+            'valor' => $request->valor
+        ]);
+
+        if ($create) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Serviço criado com êxito.',
+                'data' => $create
+            ], 201);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Falha ao criar serviço.'
+            ], 500);
+        }
     }
 
     public function update(Request $request, $id)
     {
         $servico = Servico::findOrFail($id);
         $servico->update($request->all());
-        return response()->json($servico);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Serviço atualizado com sucesso.',
+            'data' => $servico
+        ], 200);
     }
 
     public function destroy($id)
     {
-        Servico::destroy($id);
-        return response()->json(null, 204);
+        $servico = Servico::findOrFail($id);
+        $servico->delete();
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Serviço removido com sucesso.'
+        ], 204);
     }
 }
